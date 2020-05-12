@@ -166,7 +166,7 @@ namespace    // unnamed, anonymous namespace
 
         ///////////////////////// TO-DO (1) //////////////////////////////
           /// Write the line of code to push "item" at the back of the data structure under test
-          dataStructureUnderTest.push_back(item);
+          dataStructureUnderTest.push_back( item );
 
         /////////////////////// END-TO-DO (1) ////////////////////////////
 
@@ -346,9 +346,12 @@ namespace    // unnamed, anonymous namespace
           /// Since the SLL has no size() function and no tail pointer, you must walk the list looking for the last node.
           ///Hint:  Do not attempt to insert after "end()"
 
-          auto iter = dataStructureUnderTest.begin();
+          auto prevIter = dataStructureUnderTest.before_begin();
+          auto iter     = dataStructureUnderTest.begin();
           while ( iter != dataStructureUnderTest.end() ) {
-            if ( ++iter == dataStructureUnderTest.end() ) dataStructureUnderTest.insert_after( iter, item );
+            if ( ++iter == dataStructureUnderTest.end() )
+              dataStructureUnderTest.insert_after( prevIter, item );
+            ++prevIter;
           }
 
         /////////////////////// END-TO-DO (11) ////////////////////////////
@@ -460,7 +463,7 @@ namespace    // unnamed, anonymous namespace
           /// Write the line of code to emplace (or insert) the key (UPC) and value (item) into the data structure under test.  You
           /// may use either the subscript operator, emplace, or insert function.
 
-          dataStructureUnderTest.insert( std::make_pair( item.upcCode(), item) );
+          dataStructureUnderTest.insert( std::make_pair( item.upcCode(), item ) );
 
         /////////////////////// END-TO-DO (16) ////////////////////////////
 
@@ -561,6 +564,7 @@ namespace    // unnamed, anonymous namespace
           /// Note: do not implement a linear search, i.e., do not loop from beginning to end.
 
           dataStructureUnderTest.erase( target_upc );
+          return;
 
         /////////////////////// END-TO-DO (21) ////////////////////////////
 
